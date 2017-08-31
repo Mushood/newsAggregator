@@ -10,4 +10,31 @@ namespace AppBundle\Repository;
  */
 class NewsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNewsByCategoryAndNewspaper($idCategory, $idNewspaper, $date = null)
+    {
+      if($date === null){
+        $date = new \DateTime();
+      }
+      else{
+        $date = new \DateTime($date);
+      }
+
+      $qb = $this->createQueryBuilder('a');
+
+      $qb
+        ->where('a.category = :idCategory')
+        ->andWhere('a.newspaper = :idNewspaper')
+        ->andWhere('a.createdAt > :dateBegin')
+        ->andWhere('a.createdAt < :dateEnd')
+        ->setParameter('idCategory', $idCategory)
+        ->setParameter('idNewspaper', $idNewspaper)
+        ->setParameter('dateEnd', $date->format('Y-m-d H:i:s'))
+        ->setParameter('dateBegin', $date->sub(new \DateInterval('P1D'))->format('Y-m-d H:i:s'))
+      ;
+
+      return $qb
+        ->getQuery()
+        ->getResult()
+      ;
+    }
 }

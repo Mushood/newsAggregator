@@ -23,32 +23,38 @@ class NewsController extends Controller
           ->getRepository('AppBundle:Newspaper')
         ;
 
-        $express = $repositoryNewspaper->find(1);
-        $defimedia = $repositoryNewspaper->find(2);
-        $mauricien = $repositoryNewspaper->find(3);
+        $expresses = $repositoryNews->getNewsByCategoryAndNewspaper(1,1);
+        $defiMedias = $repositoryNews->getNewsByCategoryAndNewspaper(1,2);
+        $mauriciens = $repositoryNews->getNewsByCategoryAndNewspaper(1,3);
 
-        $expresses = $repositoryNews->findBy(
-          array(
-            'newspaper' => $express,
-          ), // Critere
-          array(),        // Tri
-          10,                              // Limite
-          0                               // Offset
-        );
+        return $this->render('AppBundle:news:index.html.twig', array(
+          'expresses' => $expresses,
+          'defiMedias' => $defiMedias,
+          'mauriciens' => $mauriciens,
+        ));
+    }
 
-        $defiMedias = $repositoryNews->findBy(
-          array('newspaper' => $defimedia), // Critere
-          array(),        // Tri
-          10,                              // Limite
-          0                               // Offset
-        );
+    /**
+     * @Route("/date", name="date")
+     */
+    public function dateAction(Request $request)
+    {
+        $repositoryNews = $this->container->get('doctrine')
+          ->getManager()
+          ->getRepository('AppBundle:News')
+        ;
 
-        $mauriciens = $repositoryNews->findBy(
-          array('newspaper' => $mauricien), // Critere
-          array(),        // Tri
-          10,                              // Limite
-          0                               // Offset
-        );
+        $repositoryNewspaper = $this->container->get('doctrine')
+          ->getManager()
+          ->getRepository('AppBundle:Newspaper')
+        ;
+
+        $date = new \DateTime();
+        $date->sub(new \DateInterval('P1D'));
+
+        $expresses = $repositoryNews->getNewsByCategoryAndNewspaper(1,1,$date->format('Y-m-d H:i:s'));
+        $defiMedias = $repositoryNews->getNewsByCategoryAndNewspaper(1,2,$date->format('Y-m-d H:i:s'));
+        $mauriciens = $repositoryNews->getNewsByCategoryAndNewspaper(1,3,$date->format('Y-m-d H:i:s'));
 
         return $this->render('AppBundle:news:index.html.twig', array(
           'expresses' => $expresses,
