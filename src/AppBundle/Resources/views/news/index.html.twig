@@ -17,7 +17,13 @@
     </head>
     <body>
       <div class="container">
-        <h1>A la une Aujourdhui</h1>
+        <h1>A la une <small>Date: {{ date }}</small></h1>
+
+        <form method="post" action="{{path('date')}}">
+            {{ form_rest(form) }}
+          <input type="submit" value="Submit">
+        </form>
+
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <h2>Express</h2>
@@ -44,6 +50,6 @@
             {% endfor %}
           </div>
         </div>
-      </div>        
+      </div>
     </body>
 </html>
