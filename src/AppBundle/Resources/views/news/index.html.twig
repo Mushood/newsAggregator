@@ -4,28 +4,46 @@
         <meta charset="UTF-8" />
         <title>News Aggregator</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- Bootstrap CDN -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
     <body>
-        <h1>A la une</h1>
-        <h2>Express</h2>
-        {% for news in expresses %}
-          <a href="{{news.link}}" target="_blank">
-            <h2>{{ news.title }}</h2>
-          </a>
-        {% endfor %}
-
-        <h2>Defi Media</h2>
-        {% for news in defiMedias %}
-          <a href="{{news.link}}" target="_blank">
-            <h2>{{ news.title }}</h2>
-          </a>
-        {% endfor %}
-
-        <h2>Mauricien</h2>
-        {% for news in mauriciens %}
-          <a href="{{news.link}}" target="_blank">
-            <h2>{{ news.title }}</h2>
-          </a>
-        {% endfor %}
+      <div class="container">
+        <h1>A la une Aujourdhui</h1>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <h2>Express</h2>
+            {% for news in expresses %}
+              <a href="{{news.link}}" target="_blank">
+                <p>{{loop.index}}. {{ news.title }}</p>
+              </a>
+            {% endfor %}
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <h2>Defi Media</h2>
+            {% for news in defiMedias %}
+              <a href="{{news.link}}" target="_blank">
+                <p>{{loop.index}}. {{ news.title }}</p>
+              </a>
+            {% endfor %}
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <h2>Mauricien</h2>
+            {% for news in mauriciens %}
+              <a href="{{news.link}}" target="_blank">
+                <p>{{loop.index}}. {{ news.title }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>        
     </body>
 </html>

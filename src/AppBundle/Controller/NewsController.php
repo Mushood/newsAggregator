@@ -28,7 +28,9 @@ class NewsController extends Controller
         $mauricien = $repositoryNewspaper->find(3);
 
         $expresses = $repositoryNews->findBy(
-          array('newspaper' => $express), // Critere
+          array(
+            'newspaper' => $express,
+          ), // Critere
           array(),        // Tri
           10,                              // Limite
           0                               // Offset
