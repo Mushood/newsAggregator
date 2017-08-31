@@ -15,35 +15,6 @@ class NewsController extends Controller
     public function indexAction(Request $request)
     {
         $repositoryNews = $this->container->get('doctrine')
-          ->getManager()
-          ->getRepository('AppBundle:News')
-        ;
-
-        $repositoryNewspaper = $this->container->get('doctrine')
-          ->getManager()
-          ->getRepository('AppBundle:Newspaper')
-        ;
-
-        $expresses = $repositoryNews->getNewsByCategoryAndNewspaper(1,1);
-        $defiMedias = $repositoryNews->getNewsByCategoryAndNewspaper(1,2);
-        $mauriciens = $repositoryNews->getNewsByCategoryAndNewspaper(1,3);
-
-        $date = new \DateTime();
-
-        return $this->render('AppBundle:news:index.html.twig', array(
-          'expresses' => $expresses,
-          'defiMedias' => $defiMedias,
-          'mauriciens' => $mauriciens,
-          'date' => $date->format('Y-m-d')
-        ));
-    }
-
-    /**
-     * @Route("/date", name="date")
-     */
-    public function dateAction(Request $request)
-    {
-        $repositoryNews = $this->container->get('doctrine')
             ->getManager()
             ->getRepository('AppBundle:News')
         ;
@@ -69,7 +40,6 @@ class NewsController extends Controller
         }
         else {
             $date = new \DateTime();
-            $date->sub(new \DateInterval('P1D'));
         }
 
         $expresses = $repositoryNews->getNewsByCategoryAndNewspaper(1,1,$date->format('Y-m-d H:i:s'));
