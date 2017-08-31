@@ -6,6 +6,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>A la une</h1>
+        <h2>Express</h2>
+        {% for news in expresses %}
+          <a href="{{news.link}}" target="_blank">
+            <h2>{{ news.title }}</h2>
+          </a>
+        {% endfor %}
+
+        <h2>Defi Media</h2>
+        {% for news in defiMedias %}
+          <a href="{{news.link}}" target="_blank">
+            <h2>{{ news.title }}</h2>
+          </a>
+        {% endfor %}
+
+        <h2>Mauricien</h2>
+        {% for news in mauriciens %}
+          <a href="{{news.link}}" target="_blank">
+            <h2>{{ news.title }}</h2>
+          </a>
+        {% endfor %}
     </body>
 </html>

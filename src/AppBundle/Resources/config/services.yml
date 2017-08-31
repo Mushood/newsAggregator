@@ -26,3 +26,7 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Category }
         public: true
+
+    app.news_updater:
+        class: AppBundle\Services\NewsUpdater
+        arguments: [ "@doctrine.orm.entity_manager"]

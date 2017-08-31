@@ -49,6 +49,7 @@ class CrawlerAdmin extends AbstractAdmin
         $formMapper
             ->add('link')
             ->add('css')
+            ->add('status')
             ->add('category','sonata_type_model',[
                 'multiple' => false,
                 'property' => 'name',

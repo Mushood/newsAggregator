@@ -14,7 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Crawler
 {
     use TimestampableEntity;
-    
+
     /**
      * @var int
      *
@@ -37,6 +37,13 @@ class Crawler
      * @ORM\Column(name="css", type="string", length=255)
      */
     private $css;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="crawler")
@@ -107,6 +114,30 @@ class Crawler
     public function getCss()
     {
         return $this->css;
+    }
+
+    /**
+     * Set css
+     *
+     * @param string $status
+     *
+     * @return Crawler
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
