@@ -40,6 +40,8 @@ class NewsController extends Controller
         }
         else {
             $date = new \DateTime();
+            $date = new \DateTime($date->format('Y-m-d'));
+            $date->add(new \DateInterval('P1D'));
         }
 
         $expresses = $repositoryNews->getNewsByCategoryAndNewspaper(1,1,$date->format('Y-m-d H:i:s'));
@@ -50,7 +52,7 @@ class NewsController extends Controller
         //sub date to get today's date
         $date->sub(new \DateInterval('P1D'));
         }
-        
+
         return $this->render('AppBundle:news:index.html.twig', array(
           'expresses' => $expresses,
           'defiMedias' => $defiMedias,
