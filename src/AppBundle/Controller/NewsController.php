@@ -75,15 +75,8 @@ class NewsController extends Controller
       if ($request->isMethod('POST')) {
           $formSubs->handleRequest($request);
 
-          $em = $this->container->get('doctrine')->getManager();
-
-          $sub = new Subscription();
-          $sub->setEmail($request->get('form')['email']);
-          $sub->setVerified(false);
-          $sub->setToken(sha1(random_bytes(1000)));
-
-          $em->persist($sub);
-          $em->flush();
+          $email = $request->get('form')['email'];
+          $this->persistSubscription($email);
 
           $this->addFlash('notice', 'A confirmation email has been sent to your address.');
           $this->addFlash('notice', 'Do click on the link to confirm your subscription!');
@@ -95,5 +88,17 @@ class NewsController extends Controller
           'AppBundle:news:subscribe.html.twig',
           array('formSubs' => $formSubs->createView())
       );
+    }
+
+    private function persistSubscription($email){
+      $em = $this->container->get('doctrine')->getManager();
+
+      $sub = new Subscription();
+      $sub->setEmail($email);
+      $sub->setVerified(false);
+      $sub->setToken(sha1(random_bytes(1000)));
+
+      $em->persist($sub);
+      $em->flush();
     }
 }

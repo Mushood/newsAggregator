@@ -55,7 +55,12 @@ class NewsUpdater
             $news->setCategory($newsCrawler->getCategory());
             $news->setNewspaper($newsCrawler->getNewspaper());
             $news->setTitle($title);
-            $news->setLink($link);
+            if (strpos($link, "http") === false){
+              $news->setLink($url.$link);
+            } else {
+              $news->setLink($link);
+            }
+
             $this->em->persist($news);
           }
         } catch (\InvalidArgumentException $notFoundException){
