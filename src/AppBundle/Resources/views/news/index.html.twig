@@ -27,29 +27,32 @@
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <h2>Express</h2>
-            {% for news in expresses %}
-              <a href="{{news.link}}" target="_blank">
-                <p>{{loop.index}}. {{ news.title }}</p>
-              </a>
-            {% endfor %}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <h2>Defi Media</h2>
-            {% for news in defiMedias %}
-              <a href="{{news.link}}" target="_blank">
-                <p>{{loop.index}}. {{ news.title }}</p>
-              </a>
-            {% endfor %}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <h2>Mauricien</h2>
-            {% for news in mauriciens %}
-              <a href="{{news.link}}" target="_blank">
-                <p>{{loop.index}}. {{ news.title }}</p>
-              </a>
-            {% endfor %}
+            <h2>Le Mauricien</h2>
           </div>
         </div>
+
+        {% for i in 0..9 %}
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <h2>Express</h2>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <a href="{{defiMedias[i].link}}" target="_blank">
+                <p>{{i+1}}. {{ defiMedias[i].title }}</p>
+              </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <a href="{{mauriciens[i].link}}" target="_blank">
+                <p>{{i+1}}. {{ mauriciens[i].title }}</p>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </body>
 </html>

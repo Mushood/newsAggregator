@@ -46,9 +46,11 @@ class NewsController extends Controller
         $defiMedias = $repositoryNews->getNewsByCategoryAndNewspaper(1,2,$date->format('Y-m-d H:i:s'));
         $mauriciens = $repositoryNews->getNewsByCategoryAndNewspaper(1,3,$date->format('Y-m-d H:i:s'));
 
+        if ($request->isMethod('POST')) {
         //sub date to get today's date
         $date->sub(new \DateInterval('P1D'));
-
+        }
+        
         return $this->render('AppBundle:news:index.html.twig', array(
           'expresses' => $expresses,
           'defiMedias' => $defiMedias,
