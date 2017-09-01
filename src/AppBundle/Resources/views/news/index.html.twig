@@ -19,11 +19,24 @@
       <div class="container">
         <h1>A la une <small>Date: {{ date }}</small></h1>
 
-        <form method="post" action="{{path('homepage')}}">
-            {{ form_rest(form) }}
-          <input type="submit" value="Submit">
-        </form>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <form method="post" action="{{path('homepage')}}">
+                {{ form_rest(formDate) }}
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            {{ render(controller(
+                'AppBundle:News:subscribe'
+            )) }}
 
+            {% for flashMessage in app.flashes('notice') %}
+                {{ flashMessage }}
+            {% endfor %}
+
+          </div>
+        </div>
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <h2>Express</h2>
@@ -39,19 +52,25 @@
         {% for i in 0..9 %}
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              {% if  expresses %}
               <a href="{{expresses[i].link}}" target="_blank">
                 <p>{{i+1}}. {{ expresses[i].title }}</p>
               </a>
+              {% endif %}
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              {% if  defiMedias %}
               <a href="{{defiMedias[i].link}}" target="_blank">
                 <p>{{i+1}}. {{ defiMedias[i].title }}</p>
               </a>
+              {% endif %}
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              {% if  mauriciens %}
               <a href="{{mauriciens[i].link}}" target="_blank">
                 <p>{{i+1}}. {{ mauriciens[i].title }}</p>
               </a>
+              {% endif %}
             </div>
           </div>
         {% endfor %}
